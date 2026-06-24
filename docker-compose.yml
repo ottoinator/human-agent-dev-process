@@ -1,0 +1,9 @@
+services:
+  qa:
+    build:
+      context: .
+      dockerfile: qa/Dockerfile
+    working_dir: /repo
+    volumes:
+      - .:/repo:ro
+    command: ["bash", "scripts/qa.sh"]

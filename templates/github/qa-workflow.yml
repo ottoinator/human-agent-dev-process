@@ -1,0 +1,15 @@
+name: QA
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Docker QA
+        run: docker compose run --rm qa
