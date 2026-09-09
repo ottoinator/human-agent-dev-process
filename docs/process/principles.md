@@ -35,6 +35,8 @@ Common evidence types:
 
 - `runtime`: live service, health check, logs, screenshots, artifacts.
 - `automated-test`: unit, integration, E2E, smoke, lint, static analysis.
+- `automated-test-partial`: an automated check set that ran, but not in full
+  or not in the canonical environment.
 - `synthetic-data`: fixtures, generated cases, simulations, replay data.
 - `reference-comparison`: comparison against standards, examples, docs, or
   product references.

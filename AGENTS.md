@@ -12,13 +12,20 @@ Act as a compact software team in one agent:
   examples, and QA scripts.
 - Prefer small, verifiable improvements over broad rewrites.
 
-## Read Order
+## Reading Budget
 
-1. `README.md`
-2. `docs/process/principles.md`
-3. `docs/process/lifecycle.md`
-4. `docs/process/quality-gates.md`
-5. Relevant files in `templates/`, `skills/`, or `examples/`
+This file is the entry point. Read further only as the tier requires, so small
+tasks stay small.
+
+- Tier 0: this file, plus the file in question.
+- Tier 1: this file, plus the files you change and the files that mirror their
+  wording.
+- Tier 2: add `docs/process/lifecycle.md` and `docs/process/quality-gates.md`.
+- Tier 3: add `docs/process/principles.md`,
+  `docs/process/roles-and-responsibilities.md`, and `docs/reference/`.
+
+`README.md` is written for humans evaluating the toolkit. Read it when the task
+is about positioning, adoption, or public claims, not as a default first step.
 
 ## Repository Boundaries
 
@@ -42,17 +49,25 @@ Agents own:
 - Reading context before edits.
 - Choosing the smallest safe implementation.
 - Updating docs/templates/skills together when the process changes.
-- Running Docker QA.
+- Running QA.
 - Reporting evidence, limits, and remaining risks honestly.
 
 ## Tier Rules
 
-- Tier 0: answer directly; no process overhead unless helpful.
-- Tier 1: use at least one focused review or QA pass.
-- Tier 2: clarify product intent, run relevant gates, and verify with tests or
-  evidence.
-- Tier 3: complete discovery, product, research/reference, architecture, QA,
-  critic, and security/privacy passes before claiming readiness.
+Classify by risk and reversibility, not by how many files change. See
+`docs/process/lifecycle.md` for the classification questions and examples.
+
+- Tier 0: no repository change; answer directly, no process overhead.
+- Tier 1: reversible correction or clarification that does not change what the
+  process requires; use at least one focused review or QA pass.
+- Tier 2: changes what humans or agents must do, such as normative docs, gates,
+  templates, skills, evidence labels, or the QA check set; run the gates
+  `docs/process/lifecycle.md` lists for Tier 2.
+- Tier 3: hard to reverse or publicly binding; run the full gate set before
+  claiming readiness.
+
+Report each gate that ran using the result format in
+`docs/process/quality-gates.md`.
 
 ## Public Safety
 
@@ -66,14 +81,22 @@ Do not add:
 
 ## Required QA
 
-Before committing changes, run:
+Before committing changes, run the canonical check:
 
 ```bash
 docker compose run --rm qa
 ```
 
-If Docker cannot run, report QA as blocked. Do not replace Docker QA with
-host-native checks when making release claims.
+If Docker is unavailable, run the host fallback instead of skipping QA:
+
+```bash
+bash scripts/qa-host.sh
+```
+
+The fallback reports `automated-test-partial`. Report it as such, name the
+skipped checks, and state that the release gate is not satisfied. Never report
+a fallback or a blocked check as a full pass. If neither can run, QA is
+`blocked`.
 
 ## Done Contract
 
@@ -81,6 +104,6 @@ Before final delivery, report:
 
 - What changed.
 - Why it fits the process boundaries.
-- QA command and result.
+- QA command, result, and evidence label.
 - Security/privacy review result when public safety could be affected.
 - Remaining evidence gaps, including `human-validation-missing` when relevant.

@@ -6,8 +6,15 @@ This repository uses explicit evidence labels.
 
 `automated-test`
 
-: A deterministic or repeatable tool check, such as Docker QA, lint, link check,
-structure assertion, or secret pattern scan.
+: A deterministic or repeatable tool check that ran in full, such as Docker QA,
+lint, link check, structure assertion, or secret pattern scan.
+
+`automated-test-partial`
+
+: An automated check set that ran, but not in full or not in the canonical
+environment. Use it when tools are missing, checks were skipped, or the run
+happened outside the pinned QA image. It never satisfies a release gate on its
+own.
 
 `reference-comparison`
 
@@ -32,6 +39,20 @@ screenshots, deployment status, or URL.
 
 : A marker that real user, customer, maintainer, market, or expert validation is
 absent.
+
+## Partial Evidence Rules
+
+Partial evidence is still evidence. Reporting it is better than reporting
+nothing, as long as the gap is explicit.
+
+When reporting `automated-test-partial`, always state:
+
+- Which checks ran and passed.
+- Which checks were skipped, and why.
+- That the release gate is not satisfied.
+
+Do not upgrade `automated-test-partial` to `automated-test` by rerunning the
+same reduced check set. Only a full run in the canonical environment does that.
 
 ## Claim Rules
 

@@ -26,15 +26,17 @@ For an existing repository:
 3. Choose the task tier from
    [docs/process/lifecycle.md](docs/process/lifecycle.md).
 4. Run the relevant gates from
-   [docs/process/quality-gates.md](docs/process/quality-gates.md).
+   [docs/process/quality-gates.md](docs/process/quality-gates.md) and report each
+   one with [templates/agent/GATE_RESULT.md](templates/agent/GATE_RESULT.md).
 5. Use [templates/project/RELEASE_CHECKLIST.md](templates/project/RELEASE_CHECKLIST.md)
    before claiming the work is done.
 
 For an agent:
 
-1. Read [AGENTS.md](AGENTS.md) first.
+1. Read [AGENTS.md](AGENTS.md) first, and read further only as its reading
+   budget for the tier requires.
 2. Use the skill contracts in [skills/](skills/).
-3. Produce evidence, not just summaries.
+3. Produce evidence, not just summaries, and label partial evidence as partial.
 4. Stop for owner decisions where the process says humans own the decision.
 
 ## Repository Map
@@ -55,7 +57,7 @@ qa/                Docker image for reproducible QA.
 
 - Humans own goals, risk, scope, taste, ethics, cost, and release decisions.
 - Agents own implementation, verification, integration, and honest reporting.
-- Process should scale with task complexity, not make every task heavy.
+- Process should scale with risk and reversibility, not with file count.
 - Claims require evidence: tests, runtime proof, screenshots, reviews, or logs.
 - AI-only validation is useful, but it is not the same as human or market
   validation.
@@ -64,9 +66,12 @@ qa/                Docker image for reproducible QA.
 
 ## Task Tiers
 
-- Tier 0: direct answer or tiny command.
-- Tier 1: small local change or narrow bug fix.
-- Tier 2: feature, workflow, user-facing, data, runtime, or multi-file change.
+Tiers follow risk and reversibility, not how many files change.
+
+- Tier 0: no repository change; direct answer or tiny command.
+- Tier 1: reversible correction that does not change what the process requires.
+- Tier 2: changes what humans or agents must do, such as user-facing behavior,
+  data flow, normative docs, templates, skills, or the QA check set.
 - Tier 3: new product, new public repository, major redesign, or hard-to-reverse
   decision.
 
@@ -91,8 +96,10 @@ useful and adaptable, not a universal standard.
 
 Evidence labels used here:
 
-- `automated-test`: Docker QA for markdown, links, structure, scripts, and
-  secret patterns.
+- `automated-test`: full Docker QA for markdown, links, structure, process
+  consistency, scripts, and secret patterns.
+- `automated-test-partial`: a reduced check set, for example the host fallback
+  used when Docker is unavailable. It never satisfies a release gate.
 - `reference-comparison`: GitHub community file conventions and AGENTS.md
   patterns informed the structure.
 - `ai-review`: synthetic product, architecture, QA, critic, and research passes.
@@ -108,7 +115,16 @@ docker compose run --rm qa
 ```
 
 The QA harness checks repository structure, Markdown formatting, internal links,
-basic secret patterns, and shell script syntax.
+basic secret patterns, process consistency, and shell script syntax.
+
+When Docker is unavailable, run the host fallback:
+
+```bash
+bash scripts/qa-host.sh
+```
+
+It runs every check whose tool is present, names the ones it skipped, and
+reports `automated-test-partial`.
 
 If your GitHub token has permission to write workflows, you can copy
 [templates/github/qa-workflow.yml](templates/github/qa-workflow.yml) to

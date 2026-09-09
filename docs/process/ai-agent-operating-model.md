@@ -5,8 +5,9 @@ a ceremony.
 
 ## Default Behavior
 
-1. Read the relevant files before editing.
-2. Classify task tier.
+1. Read the local agent instruction file.
+2. Classify task tier by risk and reversibility, then read to that tier's
+   reading budget.
 3. Identify decisions that belong to the human owner.
 4. Choose the smallest implementation that satisfies the goal.
 5. Verify with evidence.
@@ -56,8 +57,12 @@ A useful final report includes:
 - Claim status.
 - Remaining risks.
 
+Report each gate that ran as a gate result block, using the format in
+[quality-gates.md](quality-gates.md).
+
 Avoid:
 
 - Long unverified summaries.
 - Claims stronger than the evidence.
 - Hiding failed or blocked checks.
+- Reporting a reduced or fallback check set as a full pass.

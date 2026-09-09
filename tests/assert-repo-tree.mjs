@@ -21,6 +21,7 @@ const required = [
   "templates/project/PROJECT_START.md",
   "templates/project/RELEASE_CHECKLIST.md",
   "templates/agent/TASK_BRIEF.md",
+  "templates/agent/GATE_RESULT.md",
   "skills/human-agent-process/SKILL.md",
   "skills/qa-engineer/SKILL.md",
   "skills/critic-reviewer/SKILL.md",
@@ -28,6 +29,8 @@ const required = [
   "docker-compose.yml",
   "qa/Dockerfile",
   "scripts/qa.sh",
+  "scripts/qa-host.sh",
+  "tests/check-process-consistency.mjs",
   "templates/github/qa-workflow.yml",
 ];
 

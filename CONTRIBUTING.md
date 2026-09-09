@@ -21,6 +21,9 @@ Thanks for helping improve the Human-Agent Development Process.
    docker compose run --rm qa
    ```
 
+   If Docker is unavailable, run `bash scripts/qa-host.sh` and say in the pull
+   request which checks were skipped.
+
 4. Avoid private examples, private paths, logs, screenshots, credentials, or
    organization-specific assumptions.
 

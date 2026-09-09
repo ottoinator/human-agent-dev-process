@@ -13,7 +13,8 @@
 
 ## Evidence
 
-- [ ] `docker compose run --rm qa`
+- [ ] `docker compose run --rm qa` (or `bash scripts/qa-host.sh`, partial)
+- [ ] Evidence label matches what actually ran
 - [ ] Security/privacy checked
 - [ ] Claims match evidence
 

@@ -39,11 +39,21 @@ Ask:
 
 ## Output Contract
 
-Return:
+Return a gate result block as defined in `docs/process/quality-gates.md`:
+
+```yaml
+gate: critic
+tier: <0-3>
+result: pass | fail | blocked
+verdict: <pre-build or post-build verdict>
+evidence_type: ai-review
+evidence: <perspective and what was reviewed>
+required_changes: <blockers and majors>
+```
+
+Plus, in prose:
 
 - Mode: pre-build or post-build.
 - Perspective.
-- Findings.
-- Required changes.
-- Verdict.
+- Findings tagged blocker, major, or minor.
 - Owner questions.
