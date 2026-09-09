@@ -1,0 +1,43 @@
+schema: project_agent_v1
+project_id: human-agent-dev-process
+project:
+  intent: public-product
+  lifecycle: active
+repository:
+  provider: github
+  slug: ottoinator/human-agent-dev-process
+  visibility: public
+checkout:
+  kind: primary
+control_plane:
+  policy_file: AGENTS.md
+  claude_file: CLAUDE.md
+memory:
+  service: enchilada
+  workspace: common
+  read_policy: canonical-only
+  write_policy: owner-authorized-only
+runtime:
+  state: not-applicable
+  evidence_refs: []
+deployment:
+  state: not-applicable
+  evidence_refs: []
+skills:
+  core:
+    - project-control-plane
+  adapters:
+    - project-control-plane:claude-code
+    - project-control-plane:codex
+authority:
+  contract_only: true
+  writes_require_owner_scope: true
+  deploy_allowed: false
+  outbound_allowed: false
+  credential_access_allowed: false
+status:
+  registration: registered
+  schema: schema-valid
+  policy: declared-not-enforced
+  runtime: not-applicable
+  deployment: not-applicable
