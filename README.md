@@ -1,5 +1,11 @@
 # Human-Agent Development Process
 
+> **Superseded.** This repository covered the software flow only. Its
+> successor, [ottoinator/human-agent-process](https://github.com/ottoinator/human-agent-process),
+> carries the software **and** knowledge-work flows, the blast-radius rule for
+> the critic gate, a memory layer, and an installable Claude Code setup. Use
+> that one; this repo stays online for reference and is no longer maintained.
+
 A practical software development process for humans and AI agents working
 together.
 
